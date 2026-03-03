@@ -11,8 +11,8 @@ import fetch from "node-fetch"; // Import node-fetch
 import csv from "csv-parser"; // Import csv-parser
 import { Readable } from "stream"; // Import Readable from stream
 
-// Load environment variables from .env.local
-dotenv.config({ path: "./.env.local" });
+// Load environment variables from .env
+dotenv.config({ path: "./.env" });
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -40,11 +40,9 @@ app.get("/api/sheet-data", async (req, res) => {
     const sheetName = "Sheet1"; // Your sheet tab name
 
     if (!spreadsheetId) {
-      return res
-        .status(500)
-        .json({
-          error: "Google Sheet ID not configured in environment variables.",
-        });
+      return res.status(500).json({
+        error: "Google Sheet ID not configured in environment variables.",
+      });
     }
 
     // Construct the CSV export URL
@@ -74,12 +72,10 @@ app.get("/api/sheet-data", async (req, res) => {
       });
   } catch (error) {
     console.error("Error fetching Google Sheet data:", error);
-    res
-      .status(500)
-      .json({
-        error:
-          "Failed to fetch data from Google Sheet. Check server logs for details.",
-      });
+    res.status(500).json({
+      error:
+        "Failed to fetch data from Google Sheet. Check server logs for details.",
+    });
   }
 });
 
