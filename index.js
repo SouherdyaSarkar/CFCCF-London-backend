@@ -36,8 +36,8 @@ app.use("/submissions", submissiomRouter);
 // New route to fetch Google Sheet data as CSV
 app.get("/api/sheet-data", async (req, res) => {
   try {
-    const spreadsheetId = process.env.GOOGLE_SHEET_ID;
-    const sheetName = "Sheet1"; // Your sheet tab name
+    // const spreadsheetId = process.env.GOOGLE_SHEET_ID;
+    const sheetName = "Registrations"; // Your sheet tab name
 
     if (!spreadsheetId) {
       return res.status(500).json({
@@ -46,7 +46,7 @@ app.get("/api/sheet-data", async (req, res) => {
     }
 
     // Construct the CSV export URL
-    const csvUrl = `https://docs.google.com/spreadsheets/d/${spreadsheetId}/gviz/tq?tqx=out:csv&sheet=${sheetName}`;
+    const csvUrl = `https://docs.google.com/spreadsheets/d/11bREdD2rABgUuzf4s6ZLcs10kYHp3ZHBcRdOacU5BuE/gviz/tq?tqx=out:csv&sheet=${sheetName}`;
 
     const response = await fetch(csvUrl);
 
